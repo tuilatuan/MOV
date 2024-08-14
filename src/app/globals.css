@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .heading {
+    @apply font-nunito font-bold text-bltext transition-all duration-300;
+  }
+
+  .trans300 {
+    @apply transition-all duration-300;
+  }
+
+  .appear {
+    @apply trans300 visible opacity-100;
+  }
+
+  .unappear {
+    @apply trans300 invisible opacity-0;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+}
+
+:root {
+  --h-header: 60px;
+}
+
+@screen md {
+  :root {
+    --h-header: 80px;
+  }
+}
+/* Tùy chỉnh toàn bộ thanh cuộn */
+::-webkit-scrollbar {
+  width: 4px; /* Chiều rộng của thanh cuộn dọc */
+  border: 2px solid #488bff; /* Viền màu đen */
+}
+
+/* Tùy chỉnh background của thanh cuộn */
+::-webkit-scrollbar-track {
+  background: #ffffff; /* Nền trắng */
+}
+
+/* Tùy chỉnh thanh kéo (thumb) */
+::-webkit-scrollbar-thumb {
+  background: #488bff; /* Màu thanh kéo */
+  border-radius: 6px; /* Bo góc cho thanh kéo */
+}
+
+/* Tùy chỉnh khi hover lên thanh kéo */
+::-webkit-scrollbar-thumb:hover {
+  background: #5593fe; /* Màu khi hover lên thanh kéo */
+}
