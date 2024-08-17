@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
 import Flickity from "flickity";
+import React, { useEffect, useRef, useState } from "react";
 
 import "flickity/css/flickity.css";
-import "@/libs/flickity/custom.css";
 import Button from "../button/Button";
 import IconArrow from "../icons/IconArrow";
 

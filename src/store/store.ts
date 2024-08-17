@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import menuMobileReducer from "@/store/reducer/menuSlice";
+import languageReducer from "./reducer/languageSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       //su dung các reducer o day
       menu: menuMobileReducer,
+      language: languageReducer,
     },
   });
 };

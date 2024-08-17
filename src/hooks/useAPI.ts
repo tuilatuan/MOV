@@ -1,18 +1,40 @@
+// src/hooks/useApi.ts
 "use client";
 
-import useSWR from "swr";
-import type { SWRConfiguration, SWRResponse } from "swr";
+import { useState, useEffect, useCallback } from "react";
 
-type FetcherFn<Data> = (...args: any[]) => Promise<Data>;
+interface ApiResponse<T> {
+  data: T | null;
+  loading: boolean;
+  error: string | null;
+  refetch: () => Promise<void>;
+}
 
-const defaultFetcher = (url: string) => fetch(url).then((res) => res.json());
-export function useApi<Data = any, Error = any>(
-  endpoint: string,
-  fetcher: FetcherFn<Data> = defaultFetcher,
-  config?: SWRConfiguration,
-): SWRResponse<Data, Error> {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.example.com'";
-  const fullUrl = `${baseUrl}${endpoint}`;
-  return useSWR<Data, Error>(fullUrl, fetcher, config);
+export function useApi<T>(apiFunction: () => Promise<T>): ApiResponse<T> {
+  const [data, setData] = useState<T | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchData = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const result = await apiFunction();
+      setData(result);
+    } catch (err) {
+      setError("Đã xảy ra lỗi khi tải dữ liệu");
+    } finally {
+      setLoading(false);
+    }
+  }, [apiFunction]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  const refetch = useCallback(() => {
+    return fetchData();
+  }, [fetchData]);
+
+  return { data, loading, error, refetch };
 }

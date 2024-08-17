@@ -8,6 +8,7 @@ import ActiveLink from "../common/ActiveLink";
 import MenuMobile from "./MenuMobile";
 import Navbar from "../Navbar";
 import ButtonLink from "../button/ButtonLink";
+import ButtonHandleLang from "../button/ButtonHandleLang";
 
 const Header = () => {
   return (
@@ -27,14 +28,7 @@ const Header = () => {
             contact us
           </ButtonLink>
 
-          <div className="langgr">
-            <Button className="rounded-30 border border-solid text-bltext">
-              EN
-            </Button>
-            <Button className="rounded-30 text-blue hover:text-bltext">
-              VN
-            </Button>
-          </div>
+          <ButtonHandleLang />
         </div>
 
         <ButtonHandleMenuMobile />
